@@ -1,5 +1,11 @@
 import tweepy
 import credentials
+import save_tweets as st
+#import clean
+from clean import CleanTweet
+
+
+cleant = CleanTweet()
 
 # Authenticate to Twitter
 auth = tweepy.OAuthHandler(credentials.consumer_key, credentials.consumer_secret)
@@ -27,9 +33,14 @@ tweets = tweepy.Cursor(api.search,
                        q=new_search,
                        lang="en",
                        since=date_since).items(5)
-
+output = []
 for tweet in tweets:
-	print(tweet.created_at)
-	print('\n')
-	print(tweet.text)
-	print('\n')
+
+    line = {'date':tweet.created_at, 'text':cleant.clean(tweet.text)}
+    output.append(line)
+    print(tweet.created_at)
+    print('\n')
+    print(tweet.text)
+    print('\n')
+
+st.save(output)
