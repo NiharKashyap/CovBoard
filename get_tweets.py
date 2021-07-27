@@ -3,7 +3,7 @@ import credentials
 import save_tweets as st
 #import clean
 from clean import CleanTweet
-from datetime import date
+import datetime
 
 cleant = CleanTweet()
 
@@ -29,12 +29,12 @@ new_search = "COVID Update from:DeputyJorhat"
 
 #date_since = "2021-07-01"
 
-date_since = date.today()
+date_since = datetime.datetime.now().date()
 
 tweets = tweepy.Cursor(api.search,
                        q=new_search,
                        lang="en",
-                       since=date_since).items(5)
+                       since=date_since).items()
 output = []
 for tweet in tweets:
 
