@@ -4,8 +4,12 @@ import save_tweets as st
 #import clean
 from clean import CleanTweet
 import datetime
+from save_to_sheet import Gsheet
 
 cleant = CleanTweet()
+
+gs = Gsheet()
+
 
 # Authenticate to Twitter
 auth = tweepy.OAuthHandler(credentials.consumer_key, credentials.consumer_secret)
@@ -38,11 +42,12 @@ tweets = tweepy.Cursor(api.search,
 output = []
 for tweet in tweets:
 
-    line = {'date':tweet.created_at, 'text':cleant.clean(tweet.text)}
+    line = {'Date':str(tweet.created_at), 'Count':cleant.clean(tweet.text)}
     output.append(line)
     print(tweet.created_at)
     print('\n')
     print(tweet.text)
     print('\n')
 
-st.save(output)
+#st.save(output)
+gs.save_sheet(output)
