@@ -16,5 +16,5 @@ class CleanTweet:
 				if(len(str)!=0):
 					num.append(str)
 				str = ''
-
-		return num[0]
+		print(num)
+		return num
