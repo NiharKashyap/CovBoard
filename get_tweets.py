@@ -31,9 +31,9 @@ except:
 
 new_search = "COVID Update from:DeputyJorhat"
 
-date_since = "2021-07-01"
+#date_since = "2021-07-01"
 
-#date_since = datetime.datetime.now().date()
+date_since = datetime.datetime.now().date()
 
 tweets = tweepy.Cursor(api.search,
                        q=new_search,
@@ -49,4 +49,5 @@ for tweet in tweets:
     print(tweet.full_text)
     print('\n')
 
-st.save(output)
+#st.save(output)
+gs.save_sheet(output)
